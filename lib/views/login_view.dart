@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 
 final Color backgroundColor = Color(0xFF4A4A58);
 
-class MenuDashboardPage extends StatelessWidget {
+class MenuDashboardPage extends StatefulWidget {
+  @override
+  State<MenuDashboardPage> createState() => _MenuDashboardPageState();
+}
+
+class _MenuDashboardPageState extends State<MenuDashboardPage> {
+
+  bool isCollapsed = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,15 +53,25 @@ class MenuDashboardPage extends StatelessWidget {
     return Material(
       elevation: 8,
       color: backgroundColor,
-      child: Column(
-        children: <Widget>[
-          Row(
-            children: const [
-            Icon(Icons.menu, color: Colors.white),
-            Text("My cards", style: TextStyle(fontSize: 24, color: Colors.white)),
-            Icon(Icons.settings, color: Colors.white),
-            ]),
-        ],
+      child: Container(
+        padding: EdgeInsets.only(left: 16, right: 16, top: 48),
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: const [
+              InkWell(child: Icon(Icons.menu, color: Colors.white), onTap: () {
+                setState(() {
+                  isCollapsed = !isCollapsed;
+                });
+              },),
+              Text("My cards", style: TextStyle(fontSize: 24, color: Colors.white)),
+              Icon(Icons.settings, color: Colors.white),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
